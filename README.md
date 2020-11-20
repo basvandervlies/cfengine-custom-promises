@@ -4,6 +4,8 @@ Contains some test with the new CFengine 3.17 custom promise type. Uses the modu
 cfengine-core github repo located at:
  - https://github.com/cfengine/core/tree/master/docs/custom_promise_types
 
+This repo will contain some first quick tests on how to use this.
+
 ## certificate.py
 A simple promise type to check when your certificate will expire, when within the "days" threshold the promise os not kepted and someone needs to doe something?
 
