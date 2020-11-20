@@ -1,0 +1,18 @@
+body common control
+{
+  bundlesequence => { "run_me" };
+}
+
+promise agent certificate
+{
+    path => "modules/certificate.py";
+    interpreter => "/usr/bin/python3";
+}
+
+bundle agent run_me
+{
+
+    certificate:
+        "/etc/certificate/certificate.pem"
+            days => "600";
+}
