@@ -1,18 +1,15 @@
-body common control
-{
-  bundlesequence => { "run_me" };
-}
-
 promise agent certificate
 {
-    path => "modules/certificate.py";
+    path => "/var/cfengine/promises/certificate.py";
     interpreter => "/usr/bin/python3";
 }
 
-bundle agent run_me
+bundle agent main
 {
-
     certificate:
+        "etc/certificate/certificate.pem"
+            days => "600";
+
         "/etc/certificate/certificate.pem"
             days => "600";
 }
