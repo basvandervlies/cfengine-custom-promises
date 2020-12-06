@@ -30,7 +30,13 @@ def validate_certificate(certificate_file, days=30):
 class CertificatePromiseTypeModule(PromiseModule):
 
     def validate_promise(self, promiser, attributes):
-        pass
+        if not promiser.startswith("/"):
+            raise ValidationError(f"Certificate path '{promiser}' must be absolute")
+        #for name, value in attributes.items():
+        #    if name != "days":
+        #        raise ValidationError(f"Unknown attribute '{name}' for git promises")
+        #    if name == "days" and type(value) is not int:
+        #        raise ValidationError("'days' must be integer for certificate promise types")
 
     def evaluate_promise(self, promiser, attributes):
 
