@@ -5,7 +5,7 @@ import datetime
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 
-from cfengine import PromiseModule, ValidationError
+from cfengine import PromiseModule, ValidationError, Result
 
 def validate_certificate(certificate_file, days=30):
 
@@ -42,20 +42,20 @@ class CertificatePromiseTypeModule(PromiseModule):
 
         if not os.path.exists(promiser):
             self.log_error('Given path does not exists %s' % promiser)
-            self.promise_not_kept()
+            return Result.NOT_KEPT
         elif not os.path.isfile(promiser):
             self.log_error('Given path must be a file %s' % promiser)
-            self.promise_not_kept()
+            return Result.NOT_KEPT
         else:
             result, message = validate_certificate(promiser, **attributes)
 
 
             if result:
                 self.log_error(message)
-                self.promise_not_kept()
+                return Result.NOT_KEPT
             else:
                 self.log_info(message)
-                self.promise_kept()
+                return Result.KEPT
 
 
 if __name__ == "__main__":
